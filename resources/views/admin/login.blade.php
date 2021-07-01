@@ -50,7 +50,7 @@
                             </div>
                         </div>
                         <div class="form-footer" id="submit">
-                            <button @@click="submit" type="submit" class="btn btn-primary w-100">Sign in</button>
+                            <button type="submit" class="btn btn-primary w-100">Sign in</button>
                         </div>
                     </div>
                 </form>
