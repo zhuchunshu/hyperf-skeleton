@@ -17,11 +17,9 @@ class IndexController extends AbstractController
 {
     public function index(RenderInterface $render): \Psr\Http\Message\ResponseInterface
     {
-        menu()->add(2, [
-            'url' => '/',
-            'name' => '仪表盘',
-            'icon' => '',
-        ]);
-        return $render->render('index');
+       return view("index");
+    }
+    public function action(){
+        return request()->all();
     }
 }

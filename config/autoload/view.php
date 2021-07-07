@@ -1,6 +1,9 @@
 <?php
 
 declare(strict_types=1);
+
+use App\View\Component\CsrfToken;
+
 /**
  * CodeFec - Hyperf
  *
@@ -15,5 +18,8 @@ return [
     'config' => [
         'view_path' => BASE_PATH . '/resources/views/',
         'cache_path' => BASE_PATH . '/runtime/view/',
+    ],
+    'components' => [
+        'csrf' => CsrfToken::class,
     ],
 ];

@@ -613,3 +613,12 @@ if(!function_exists("de_stringify")){
         return $result;
     }
 }
+
+if(!function_exists("csrf_token")){
+    function csrf_token(){
+        if(!cache()->has("csrf_token")){
+            cache()->set("csrf_token",Str::random(),120);
+        }
+        return cache()->get("csrf_token");
+    }
+}

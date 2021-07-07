@@ -1,6 +1,9 @@
 <?php
 
 declare(strict_types=1);
+
+use App\Middleware\CsrfMiddleware;
+
 /**
  * CodeFec - Hyperf
  *
@@ -12,6 +15,7 @@ declare(strict_types=1);
 return [
     'http' => [
         \Hyperf\Session\Middleware\SessionMiddleware::class,
-        \Hyperf\Validation\Middleware\ValidationMiddleware::class
+        \Hyperf\Validation\Middleware\ValidationMiddleware::class,
+        CsrfMiddleware::class,
     ],
 ];

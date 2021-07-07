@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 use App\CodeFec\Plugins;
 use App\Controller\AdminController;
+use App\Controller\IndexController;
 use Hyperf\HttpServer\Router\Router;
 
 
@@ -28,3 +29,5 @@ Router::addGroup("/admin",function(){
     "middleware" => [\App\Middleware\AdminMiddleware::class]
 ]);
 
+Router::get("/",[IndexController::class,"index"]);
+Router::post("/",[IndexController::class,"action"]);
