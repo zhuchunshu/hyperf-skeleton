@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     <link rel="icon" href="/logo.svg" type="image/x-icon" />
     <link rel="shortcut icon" href="/logo.svg" type="image/x-icon" />
+    <script>var csrf_token="{{csrf_token()}}";</script>
     <!-- 自定义CSS -->
     @foreach(\App\CodeFec\Ui\functions::get("css") as $key => $value)
         <link rel="stylesheet" href="{{ $value }}">

@@ -10,7 +10,7 @@ const form = {
     },
     methods: {
         submit(){
-            axios.post("/admin/login",{username:this.username,password:this.password})
+            axios.post("/admin/login",{username:this.username,password:this.password,_token:csrf_token})
             .then(function(response){
                 var data = response.data
                 var content="";

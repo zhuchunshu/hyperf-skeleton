@@ -1866,7 +1866,9 @@ if (document.getElementById("app")) {
     methods: {
       // 退出登陆
       logout: function logout() {
-        axios__WEBPACK_IMPORTED_MODULE_1___default().post("/admin/logout").then(function (response) {
+        axios__WEBPACK_IMPORTED_MODULE_1___default().post("/admin/logout", {
+          _token: csrf_token
+        }).then(function (response) {
           var data = response.data;
 
           if (data.success === false) {
@@ -1896,7 +1898,8 @@ if (document.getElementById("app")) {
 
       // 获取头像
       axios__WEBPACK_IMPORTED_MODULE_1___default().post("/api/avatar", {
-        email: admin.email
+        email: admin.email,
+        _token: csrf_token
       }).then(function (response) {
         return _this.avatar = response.data.result.avatar;
       })["catch"](function (error) {
@@ -1906,133 +1909,6 @@ if (document.getElementById("app")) {
     }
   };
   Vue.createApp(vue_header).mount("#vue-header");
-}
-
-if (document.getElementById("vue-plugin-table")) {
-  var plugin_table = {
-    data: function data() {
-      return {
-        switchs: [],
-        num: 0
-      };
-    },
-    watch: {
-      switchs: function switchs(newval, oldval) {
-        if (this.num <= 0) {
-          this.num++;
-        } else {
-          axios__WEBPACK_IMPORTED_MODULE_1___default().post("/api/AdminPluginSave", {
-            data: this.switchs
-          }).then(function (response) {
-            var data = response.data;
-
-            if (data.success === true) {
-              sweetalert__WEBPACK_IMPORTED_MODULE_2___default()({
-                icon: "success",
-                title: data.result.msg
-              });
-            } else {
-              sweetalert__WEBPACK_IMPORTED_MODULE_2___default()({
-                icon: "error",
-                title: data.result.msg
-              });
-            }
-          })["catch"](function (error) {
-            sweetalert__WEBPACK_IMPORTED_MODULE_2___default()({
-              icon: "error",
-              title: "请求出错,详细查看控制台"
-            });
-            console.log(error);
-          });
-        }
-      }
-    },
-    mounted: function mounted() {
-      var _this2 = this;
-
-      //this.switchs.push("HelloWorld");
-      axios__WEBPACK_IMPORTED_MODULE_1___default().post("/api/AdminPluginList").then(function (response) {
-        return _this2.switchs = response.data.result.data;
-      })["catch"](function (error) {
-        sweetalert__WEBPACK_IMPORTED_MODULE_2___default()({
-          icon: "error",
-          title: "请求错误,详细查看控制台"
-        });
-        console.log(error);
-      });
-    },
-    methods: {
-      remove: function remove(name, path) {
-        if (this.switchs.indexOf(name) != -1) {
-          sweetalert__WEBPACK_IMPORTED_MODULE_2___default()({
-            icon: "warning",
-            title: "安全起见,卸载插件前请先禁用插件"
-          });
-        } else {
-          axios__WEBPACK_IMPORTED_MODULE_1___default().post("/api/AdminPluginRemove", {
-            path: path
-          }).then(function (response) {
-            var data = response.data;
-
-            if (data.success === true) {
-              sweetalert__WEBPACK_IMPORTED_MODULE_2___default()({
-                title: data.result.msg,
-                icon: "success"
-              });
-              setTimeout(function () {
-                location.reload();
-              }, 1200);
-            } else {
-              sweetalert__WEBPACK_IMPORTED_MODULE_2___default()({
-                title: data.result.msg,
-                icon: "error"
-              });
-            }
-          })["catch"](function (error) {
-            sweetalert__WEBPACK_IMPORTED_MODULE_2___default()({
-              title: "请求出错,详细查看控制台",
-              icon: "error"
-            });
-            console.log(error);
-          });
-        }
-      },
-      // 资源迁移
-      move: function move(name) {
-        if (this.switchs.indexOf(name) == -1) {
-          sweetalert__WEBPACK_IMPORTED_MODULE_2___default()({
-            title: "请先启用插件后在运行迁移",
-            icon: "error"
-          });
-        } else {
-          axios__WEBPACK_IMPORTED_MODULE_1___default().post("/api/AdminPluginMove", {
-            name: name
-          }).then(function (response) {
-            var data = response.data;
-
-            if (data.success === true) {
-              sweetalert__WEBPACK_IMPORTED_MODULE_2___default()({
-                title: data.result.msg,
-                icon: "success"
-              });
-            } else {
-              sweetalert__WEBPACK_IMPORTED_MODULE_2___default()({
-                title: data.result.msg,
-                icon: "error"
-              });
-            }
-          })["catch"](function (error) {
-            sweetalert__WEBPACK_IMPORTED_MODULE_2___default()({
-              title: "请求出错,详细查看控制台",
-              icon: "error"
-            });
-            console.log(error);
-          });
-        }
-      }
-    }
-  };
-  Vue.createApp(plugin_table).mount("#vue-plugin-table");
 }
 
 /***/ }),

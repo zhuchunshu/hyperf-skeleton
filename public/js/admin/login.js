@@ -2131,7 +2131,8 @@ var form = {
     submit: function submit() {
       axios__WEBPACK_IMPORTED_MODULE_0___default().post("/admin/login", {
         username: this.username,
-        password: this.password
+        password: this.password,
+        _token: csrf_token
       }).then(function (response) {
         var data = response.data;
         var content = "";
