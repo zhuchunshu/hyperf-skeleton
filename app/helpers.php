@@ -616,9 +616,12 @@ if(!function_exists("de_stringify")){
 
 if(!function_exists("csrf_token")){
     function csrf_token(){
-        if(!cache()->has("csrf_token")){
-            cache()->set("csrf_token",Str::random(),120);
+        if(!session()->has("csrf_token")){
+            session()->set("csrf_token",Str::random());
         }
-        return cache()->get("csrf_token");
+        if(!cache()->has("csrf_token".session()->get("csrf_token"))){
+            cache()->set("csrf_token".session()->get("csrf_token"),Str::random(),120);
+        }
+        return cache()->get("csrf_token".session()->get("csrf_token"));
     }
 }
