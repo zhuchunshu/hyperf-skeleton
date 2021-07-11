@@ -9,7 +9,7 @@
                 <form action="" method="POST">
                     <div class="mb-3">
                         <label class="form-label">Text</label>
-                        <x-csrf/>
+                        @csrf()
                         <input type="text" class="form-control" name="example-text-input" placeholder="Input placeholder">
                       </div>
                     <button class="btn" type="submit">提交</button>
