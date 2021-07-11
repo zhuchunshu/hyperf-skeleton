@@ -7,5 +7,7 @@ CodeFec_App_Csrf=true
 ```html
 <x-csrf/>
 ```
-代替laravel的
-`@csrf`指令
+或者
+```html
+@csrf()
+```
