@@ -625,3 +625,9 @@ if(!function_exists("csrf_token")){
         return cache()->get("csrf_token".session()->get("csrf_token"));
     }
 }
+
+if(!function_exists("Helpers_Str")){
+    function Helpers_Str(){
+        return new Str();
+    }
+}
